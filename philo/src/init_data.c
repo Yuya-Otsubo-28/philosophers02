@@ -1,4 +1,5 @@
 #include "../include/struct.h"
+#include <pthread.h>
 
 t_data	*init_philo_num(t_data *data, char **argv)
 {
@@ -25,6 +26,16 @@ t_data *init_philos(t_data *data)
 		i++;
 	}
 	return (data);
+}
+
+// forkは動的に確保したほうがよさそう
+pthread_mutex_t	init_fork(void)
+{
+	pthread_mutex_t	fork;
+
+	if (pthread_mutex_init(&fork, NULL))
+		return ()
+
 }
 
 t_data	*init_forks(t_data *data)
