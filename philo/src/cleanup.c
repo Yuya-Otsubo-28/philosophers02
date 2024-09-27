@@ -8,7 +8,7 @@ void	cleanup_philos(t_philo **philos, int num_of_philo)
 	if (!philos)
 		return ;
 	i = 0;
-	while (i < num_of_philo)
+	while (philos[i] && i < num_of_philo)
 		free(philos[i++]);
 	free(philos);
 }
