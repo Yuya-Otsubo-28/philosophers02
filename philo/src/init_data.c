@@ -28,14 +28,17 @@ t_data *init_philos(t_data *data)
 	return (data);
 }
 
-// forkは動的に確保したほうがよさそう
-pthread_mutex_t	init_fork(void)
+t_fork	*init_fork(int i)
 {
-	pthread_mutex_t	fork;
+	t_fork	*fork;
 
-	if (pthread_mutex_init(&fork, NULL))
-		return ()
-
+	fork = (t_fork *)malloc(sizeof(t_fork));
+	if (!fork)
+		return (NULL);
+	if (pthread_mutex_init(&(fork->mtx), NULL))
+		return (NULL);
+	fork->id = i;
+	return (fork);
 }
 
 t_data	*init_forks(t_data *data)
@@ -43,14 +46,15 @@ t_data	*init_forks(t_data *data)
 	size_t	i;
 	int		res;
 
-	data->forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * data->num_of_philo);
+	data->forks = (t_fork **)malloc(sizeof(t_fork *) * data->num_of_philo);
 	if (!(data->forks))
 		return (init_error(data));
+	memset(data->forks, 0, sizeof(t_fork *) * data->num_of_philo);
 	i = 0;
 	while (i < data->num_of_philo)
 	{
-		res = init_fork();
-		if (res)
+		data->forks[i] = init_fork(i);
+		if (!(data->forks[i]))
 			return (init_error(data));
 		i++;
 	}

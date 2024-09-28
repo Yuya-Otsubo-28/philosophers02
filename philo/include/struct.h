@@ -4,7 +4,7 @@
 # include <pthread.h>
 
 typedef struct s_fork {
-	pthread_mutex_t	fork;
+	pthread_mutex_t	mtx;
 	int				id;
 }	t_fork ;
 

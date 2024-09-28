@@ -13,15 +13,23 @@ void	cleanup_philos(t_philo **philos, int num_of_philo)
 	free(philos);
 }
 
-void	cleanup_forks(pthread_mutex_t *forks, int num_of_philo)
+void	cleanup_fork(t_fork *fork)
+{
+	if (!fork)
+		return ;
+	pthread_mutex_destroy(&(fork->mtx));
+	free(fork);
+}
+
+void	cleanup_forks(t_fork **forks, int num_of_philo)
 {
 	size_t	i;
 
 	if (!forks)
 		return ;
 	i = 0;
-	while (i < num_of_philo)
-		pthread_mutex_destroy(&forks[i++]);
+	while (forks[i] && i < num_of_philo)
+		cleanup_fork(forks[i++]);
 	free(forks);
 }
 
