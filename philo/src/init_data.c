@@ -1,11 +1,25 @@
 #include "../include/struct.h"
 #include <pthread.h>
 
-t_data	*init_philo_num(t_data *data, char **argv)
+t_bool	is_invalid_input(char *nbrp)
+{
+	long long	lln;
+}
+
+t_data	*init_num_datas(t_data *data, char **argv)
 {
 	if (is_invalid_input(argv[2]))
 		return (init_error(data));
 	data->num_of_philo = ft_atoi(argv[2]);
+	if (is_invalid_input(argv[3]))
+		return (init_error(data));
+	data->time_to_die = ft_atoi(argv[3]);
+	if (is_invalid_input(argv[4]))
+		return (init_error(data));
+	data->time_to_eat = ft_atoi(argv[4]);
+	if (is_invaild_input(argv[5]))
+		return (init_error(data));
+	data->time_to_sleep = ft_atoi(argv[5]);
 	return (data);
 }
 
@@ -69,7 +83,7 @@ t_data	*init_data(int argc, char **argv)
 	if (!data)
 		return (data);
 	memset(data, 0, sizeof(t_data));
-	data = init_philo_num(data, argv);
+	data = init_num_datas(data, argv);
 	if (!data)
 		return (NULL);
 	data = init_forks(data);
@@ -78,11 +92,18 @@ t_data	*init_data(int argc, char **argv)
 	data = init_philos(data);
 	if (!data)
 		return (NULL);
-	data = init_time(data, argv);
-	if (!data)
-		return (NULL);
 	data = init_must_eat(data, argc, argv);
 	if (!data)
 		return (NULL);
 	return (data);
+}
+
+
+int	main(int argc, char *argv[])
+{
+	t_data	*data;
+
+	if (argc != 5 && argc != 6)
+		return (1);
+	data = init_data(argc, argv);
 }
