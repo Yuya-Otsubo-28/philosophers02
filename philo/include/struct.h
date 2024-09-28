@@ -18,9 +18,9 @@ typedef struct s_data {
 	t_philo	**philos;
 	t_fork	**forks;
 	int		num_of_philo;
-	int		time_for_sleep;
-	int		time_to_death;
-	int		time_for_eat;
+	int		time_to_sleep;
+	int		time_to_die;
+	int		time_to_eat;
 	int		must_eat;
 }	t_data ;
 
