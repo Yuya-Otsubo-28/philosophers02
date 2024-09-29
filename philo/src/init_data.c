@@ -1,9 +1,29 @@
 #include "../include/struct.h"
 #include <pthread.h>
+#include <limits.h>
 
 t_bool	is_invalid_input(char *nbrp)
 {
 	long long	lln;
+	size_t		i;
+
+	if (!nbpr)
+		return (TRUE);
+	if (ft_strlen(nbpr) > INT_MAX_DIGIT)
+		return (TRUE);
+	lln = 0LL;
+	i = 0;
+	while (nbpr[i])
+	{
+		if (ft_isdigit(nbpr[i]))
+			return (TRUE);
+		lln *= 10;
+		lln += nbpr[i] - '0';
+		i++;
+	}
+	if (lln > INT_MAX)
+		return (TRUE);
+	return (FALSE);
 }
 
 t_data	*init_num_datas(t_data *data, char **argv)
