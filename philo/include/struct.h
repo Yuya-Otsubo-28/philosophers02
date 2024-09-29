@@ -15,6 +15,7 @@ typedef struct s_fork {
 }	t_fork ;
 
 typedef struct s_philo {
+	int		id;
 	t_fork	*right;
 	t_fork	*left;
 	int		eat_count;
