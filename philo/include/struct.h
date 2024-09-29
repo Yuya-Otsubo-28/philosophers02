@@ -3,6 +3,12 @@
 
 # include <pthread.h>
 
+# define FALSE 0
+# define TRUE 1
+# define INT_MAX_DIGIT 10
+
+typedef int t_bool;
+
 typedef struct s_fork {
 	pthread_mutex_t	mtx;
 	int				id;
