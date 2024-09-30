@@ -21,6 +21,8 @@ t_data	*init_data(int argc, char **argv);
 
 t_data	*init_error(t_data *data);
 
+int	main_error(t_data *data, int errnum);
+
 int	ft_isdigit(int c);
 
 int	ft_atoi(const char *nptr);
