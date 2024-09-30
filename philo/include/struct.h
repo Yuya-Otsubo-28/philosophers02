@@ -11,11 +11,11 @@ typedef int t_bool;
 
 typedef struct s_fork {
 	pthread_mutex_t	mtx;
-	int				id;
+	size_t			id;
 }	t_fork ;
 
 typedef struct s_philo {
-	int		id;
+	size_t	id;
 	t_fork	*right;
 	t_fork	*left;
 	int		eat_count;

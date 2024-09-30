@@ -1,5 +1,16 @@
-#include "../include/struct.h"
-#include <stdlib.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cleanup.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/30 20:36:20 by yotsubo           #+#    #+#             */
+/*   Updated: 2024/09/30 20:36:20 by yotsubo          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../include/philo.h"
 
 void	cleanup_philos(t_philo **philos, int num_of_philo)
 {
@@ -8,7 +19,7 @@ void	cleanup_philos(t_philo **philos, int num_of_philo)
 	if (!philos)
 		return ;
 	i = 0;
-	while (philos[i] && i < num_of_philo)
+	while (i < (size_t)num_of_philo && philos[i])
 		free(philos[i++]);
 	free(philos);
 }
@@ -28,7 +39,7 @@ void	cleanup_forks(t_fork **forks, int num_of_philo)
 	if (!forks)
 		return ;
 	i = 0;
-	while (forks[i] && i < num_of_philo)
+	while (i < (size_t)num_of_philo && forks[i])
 		cleanup_fork(forks[i++]);
 	free(forks);
 }

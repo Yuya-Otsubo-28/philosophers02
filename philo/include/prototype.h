@@ -23,4 +23,12 @@ t_data	*init_error(t_data *data);
 
 int	ft_isdigit(int c);
 
+int	ft_atoi(const char *nptr);
+
+size_t	ft_strlen(const char *s);
+
+int	ft_isspace(char c);
+
+
+
 #endif
