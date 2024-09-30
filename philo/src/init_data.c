@@ -1,4 +1,5 @@
 #include "../include/struct.h"
+#include "../include/prototype.h"
 #include <pthread.h>
 #include <limits.h>
 
