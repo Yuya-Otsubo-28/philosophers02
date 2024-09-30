@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/30 20:34:13 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/09/30 20:34:13 by yotsubo          ###   ########.fr       */
+/*   Created: 2024/04/15 23:52:29 by yuotsubo          #+#    #+#             */
+/*   Updated: 2024/04/15 23:52:29 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+int	ft_isdigit(int c)
+{
+	return (c >= '0' && c <= '9');
+}
 
-# include "struct.h"
-# include "prototype.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <pthread.h>
-# include <limits.h>
-# include <string.h>
-
-#endif
+// int	main(void)
+// {
+// 	char c = 'a';
+// 	printf("%d\n", ft_isdigit(c));
+// 	printf("%d\n", isdigit(c));
+// 	return (0);
+// }
