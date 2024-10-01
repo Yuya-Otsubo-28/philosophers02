@@ -15,11 +15,13 @@
 
 # include "struct.h"
 
-void	cleanup_data(t_data *data);
+void	cleanup_data(t_data *data, size_t i);
 
 t_data	*init_data(int argc, char **argv);
 
 t_data	*init_error(t_data *data);
+
+int	main_error(t_data *data, int errnum);
 
 int	ft_isdigit(int c);
 
@@ -29,6 +31,6 @@ size_t	ft_strlen(const char *s);
 
 int	ft_isspace(char c);
 
-
+t_bool	make_thread_create(t_data *data, size_t i);
 
 #endif

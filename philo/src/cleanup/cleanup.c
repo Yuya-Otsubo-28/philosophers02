@@ -44,11 +44,22 @@ void	cleanup_forks(t_fork **forks, int num_of_philo)
 	free(forks);
 }
 
-void	cleanup_data(t_data *data)
+void	cleanup_threads(pthread_t *threads, size_t to_join)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < to_join)
+		pthread_join(threads[i], NULL);
+	free(threads);
+}
+
+void	cleanup_data(t_data *data, size_t i)
 {
 	if (!data)
 		return ;
 	cleanup_philos(data->philos, data->num_of_philo);
 	cleanup_forks(data->forks, data->num_of_philo);
+	cleanup_threads(data->threads, i);
 	free(data);
 }

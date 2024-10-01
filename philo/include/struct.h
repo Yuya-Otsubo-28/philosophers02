@@ -3,10 +3,6 @@
 
 # include <pthread.h>
 
-# define FALSE 0
-# define TRUE 1
-# define INT_MAX_DIGIT 10
-
 typedef int t_bool;
 
 typedef struct s_fork {
@@ -22,13 +18,15 @@ typedef struct s_philo {
 }	t_philo ;
 
 typedef struct s_data {
-	t_philo	**philos;
-	t_fork	**forks;
-	int		num_of_philo;
-	int		time_to_sleep;
-	int		time_to_die;
-	int		time_to_eat;
-	int		must_eat;
+	t_philo		**philos;
+	t_fork		**forks;
+	pthread_t	*threads;
+	pthread_t	monitor;
+	int			num_of_philo;
+	int			time_to_sleep;
+	int			time_to_die;
+	int			time_to_eat;
+	int			must_eat;
 }	t_data ;
 
 #endif

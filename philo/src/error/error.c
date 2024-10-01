@@ -14,6 +14,19 @@
 
 t_data	*init_error(t_data *data)
 {
-	cleanup_data(data);
+	cleanup_data(data, 0);
 	return (NULL);
+}
+
+t_bool	make_thread_create(t_data *data, size_t i)
+{
+	cleanup_data(data, i);
+	return (EXIT_FAILURE);
+}
+
+int	main_error(t_data *data, int i)
+{
+	cleanup_data(data, i);
+	printf("ERROR\n");
+	return (EXIT_FAILURE);
 }

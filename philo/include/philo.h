@@ -14,6 +14,7 @@
 # define PHILO_H
 
 # include "struct.h"
+# include "macro.h"
 # include "prototype.h"
 # include <stdio.h>
 # include <stdlib.h>
