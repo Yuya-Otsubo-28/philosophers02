@@ -69,6 +69,7 @@ t_philo	*init_philo(t_data *data, size_t i)
 	else
 		philo->left = data->forks[i - 1];
 	philo->eat_count = 0;
+	philo->data_mtx = &(data->data_mtx);
 	return (philo);
 }
 
@@ -149,6 +150,8 @@ t_data	*init_data(int argc, char **argv)
 	if (!data)
 		return (data);
 	memset(data, 0, sizeof(t_data));
+	if (pthread_mutex_init(&(data->data_mtx), NULL))
+		return (init_error(data));
 	data = init_num_datas(data, argv);
 	if (!data)
 		return (NULL);

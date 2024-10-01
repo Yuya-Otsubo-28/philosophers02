@@ -11,22 +11,25 @@ typedef struct s_fork {
 }	t_fork ;
 
 typedef struct s_philo {
-	size_t	id;
-	t_fork	*right;
-	t_fork	*left;
-	int		eat_count;
+	size_t			id;
+	t_fork			*right;
+	t_fork			*left;
+	pthread_mutex_t	*data_mtx;
+	int				eat_count;
 }	t_philo ;
 
+// TODO: pthread_mutex_tをラップした構造体を定義し、mutexが初期化されたものかどうかを判定できるようにする。
 typedef struct s_data {
-	t_philo		**philos;
-	t_fork		**forks;
-	pthread_t	*threads;
-	pthread_t	monitor;
-	int			num_of_philo;
-	int			time_to_sleep;
-	int			time_to_die;
-	int			time_to_eat;
-	int			must_eat;
+	t_philo			**philos;
+	t_fork			**forks;
+	pthread_t		*threads;
+	pthread_t		monitor;
+	pthread_mutex_t	data_mtx;
+	int				num_of_philo;
+	int				time_to_sleep;
+	int				time_to_die;
+	int				time_to_eat;
+	int				must_eat;
 }	t_data ;
 
 #endif
