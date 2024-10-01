@@ -15,7 +15,7 @@
 
 # include "struct.h"
 
-void	cleanup_data(t_data *data);
+void	cleanup_data(t_data *data, size_t i);
 
 t_data	*init_data(int argc, char **argv);
 

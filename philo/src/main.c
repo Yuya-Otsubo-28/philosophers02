@@ -17,10 +17,10 @@ int	main(int argc, char *argv[])
 	t_data	*data;
 
 	if (argc != 5 && argc != 6)
-		return (main_error(data));
+		return (main_error(data, 0));
 	data = init_data(argc, argv);
 	if (!data)
-		return (main_error(data));
+		return (main_error(data, 0));
 	// make_treads();
 	cleanup(data);
 	return (EXIT_SUCCESS);

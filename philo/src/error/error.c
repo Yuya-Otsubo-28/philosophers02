@@ -14,13 +14,13 @@
 
 t_data	*init_error(t_data *data)
 {
-	cleanup_data(data);
+	cleanup_data(data, 0);
 	return (NULL);
 }
 
-int	main_error(t_data *data, int errnum)
+int	main_error(t_data *data, int i)
 {
-	cleanup_data(data);
+	cleanup_data(data, i);
 	printf("ERROR\n");
 	return (EXIT_FAILURE);
 }
