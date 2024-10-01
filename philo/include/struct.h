@@ -21,6 +21,8 @@ typedef struct s_data {
 	t_philo		**philos;
 	pthread_t	*threads;
 	t_fork		**forks;
+	pthread_t	*threads;
+	pthread_t	monitor;
 	int			num_of_philo;
 	int			time_to_sleep;
 	int			time_to_die;
