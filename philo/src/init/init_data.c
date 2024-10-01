@@ -123,6 +123,14 @@ t_data	*init_forks(t_data *data)
 	return (data);
 }
 
+t_data	*init_threads(t_data *data)
+{
+	data->threads = (pthread_t *)malloc(sizeof(pthread_t) * data->num_of_philo);
+	if (!(data->threads))
+		return (init_error(data));
+	return (data);
+}
+
 t_data	*init_must_eat(t_data *data, int argc, char *argv[])
 {
 	if (argc != 6)
@@ -148,6 +156,9 @@ t_data	*init_data(int argc, char **argv)
 	if (!data)
 		return (NULL);
 	data = init_philos(data);
+	if (!data)
+		return (NULL);
+	data = init_threads(data);
 	if (!data)
 		return (NULL);
 	data = init_must_eat(data, argc, argv);
