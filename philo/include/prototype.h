@@ -31,6 +31,6 @@ size_t	ft_strlen(const char *s);
 
 int	ft_isspace(char c);
 
-
+t_bool	make_thread_create(t_data *data, size_t i);
 
 #endif
