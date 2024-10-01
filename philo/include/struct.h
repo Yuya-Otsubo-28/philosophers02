@@ -18,13 +18,14 @@ typedef struct s_philo {
 }	t_philo ;
 
 typedef struct s_data {
-	t_philo	**philos;
-	t_fork	**forks;
-	int		num_of_philo;
-	int		time_to_sleep;
-	int		time_to_die;
-	int		time_to_eat;
-	int		must_eat;
+	t_philo		**philos;
+	pthread_t	*threads;
+	t_fork		**forks;
+	int			num_of_philo;
+	int			time_to_sleep;
+	int			time_to_die;
+	int			time_to_eat;
+	int			must_eat;
 }	t_data ;
 
 #endif
