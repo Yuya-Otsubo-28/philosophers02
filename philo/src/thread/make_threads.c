@@ -23,7 +23,7 @@ t_bool	make_threads(t_data *data)
 	i = 0;
 	while (i < data->num_of_philo)
 	{
-		if (pthread_create(&(data->threads[i]), NULL, philo_life, data->philos[i]))
+		if (pthread_create(&(data->threads[i]), NULL, simulation_start, data->philos[i]))
 			return (make_threads_error(data, i));
 		i++;
 	}
