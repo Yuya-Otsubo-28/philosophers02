@@ -10,6 +10,8 @@ typedef struct s_fork {
 	size_t			id;
 }	t_fork ;
 
+// TODO: philoの中にdataを持たせる。
+// TODO: philoの中にmsg_mtxを持たせる。
 typedef struct s_philo {
 	size_t			id;
 	t_fork			*right;

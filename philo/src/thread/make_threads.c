@@ -17,7 +17,7 @@ t_bool	make_threads(t_data *data)
 	size_t	i;
 
 	if (!data->num_of_philo)
-		return (FALSE);
+		return (make_threads_error(data, 0));
 	if (data->num_of_philo == 1)
 		return (only_one_philo(data));
 	i = 0;
