@@ -12,19 +12,34 @@
 
 #include "../../include/philo.h"
 
-char	*make_message(t_philo *philo, int status)
+char	*make_message(int status)
 {
 	char	*message;
+
+	if (status == TAKE)
+		message = "has taken a fork";
+	else if (status == EAT)
+		message = "is eating";
+	else if (status == SLEEP)
+		message = "is sleepig";
+	else if (status == THINK)
+		message = "is thinking";
+	else if (status == DIED)
+		message = "died";
+	return (message);
 }
 
-void	print_status(t_philo *philo, int status)
+t_bool	print_status(t_philo *philo, int status)
 {
 	char	*message;
+	int		time;
 
-	message = make_message(philo, status);
+	message = make_message(status);
+	time = make_time(philo);
+	if (status == EAT)
+		update_last_eat(philo);
 	pthread_mutex_lock(philo->msg_mtx);
-	printf("%s\n", message);
+	printf("%d %zu %s\n", time, philo->id, message);
 	pthread_mutex_unlock(philo->msg_mtx);
 	wait_status(philo, status);
-	free(message);
 }

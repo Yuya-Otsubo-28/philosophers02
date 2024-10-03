@@ -12,6 +12,8 @@ typedef struct s_fork {
 
 // TODO: philoの中にdataを持たせる。
 // TODO: philoの中にmsg_mtxを持たせる。
+// TODO: philoの中にlast_eatを持たせる。
+// TODO: philoの中にtime_to_sleepなど不変でよく参照する変数を追加する。
 typedef struct s_philo {
 	size_t			id;
 	t_fork			*right;

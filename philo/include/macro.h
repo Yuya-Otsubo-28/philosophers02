@@ -16,9 +16,11 @@
 # define FALSE 0
 # define TRUE 1
 # define INT_MAX_DIGIT 10
+
 # define TAKE 1
 # define EAT 2
 # define SLEEP 3
 # define THINK 4
+# define DIED 5
 
 #endif
