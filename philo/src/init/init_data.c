@@ -69,7 +69,12 @@ t_philo	*init_philo(t_data *data, size_t i)
 	else
 		philo->left = data->forks[i - 1];
 	philo->eat_count = 0;
-	philo->data_mtx = &(data->data_mtx);
+	philo->data = data;
+	// philo->count_mtx = &(data->count_mtx);
+	philo->time_to_die = data->time_to_die;
+	philo->time_to_eat = data->time_to_eat;
+	philo->time_to_sleep = data->time_to_sleep;
+	philo->must_eat = data->must_eat;
 	return (philo);
 }
 
@@ -150,9 +155,14 @@ t_data	*init_data(int argc, char **argv)
 	if (!data)
 		return (data);
 	memset(data, 0, sizeof(t_data));
-	if (pthread_mutex_init(&(data->data_mtx), NULL))
+	if (pthread_mutex_init(&(data->count_mtx), NULL))
+		return (init_error(data));
+	if (pthread_mutex_init(&data->msg_mtx, NULL))
 		return (init_error(data));
 	data = init_num_datas(data, argv);
+	if (!data)
+		return (NULL);
+	data = init_must_eat(data, argc, argv);
 	if (!data)
 		return (NULL);
 	data = init_forks(data);
@@ -162,9 +172,6 @@ t_data	*init_data(int argc, char **argv)
 	if (!data)
 		return (NULL);
 	data = init_threads(data);
-	if (!data)
-		return (NULL);
-	data = init_must_eat(data, argc, argv);
 	if (!data)
 		return (NULL);
 	return (data);

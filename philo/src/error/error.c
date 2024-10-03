@@ -18,7 +18,7 @@ t_data	*init_error(t_data *data)
 	return (NULL);
 }
 
-t_bool	make_thread_create(t_data *data, size_t i)
+t_bool	launch_thread_create(t_data *data, size_t i)
 {
 	cleanup_data(data, i);
 	return (EXIT_FAILURE);

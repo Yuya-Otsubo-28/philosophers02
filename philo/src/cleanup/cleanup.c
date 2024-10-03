@@ -54,6 +54,12 @@ void	cleanup_threads(pthread_t *threads, size_t to_join)
 	free(threads);
 }
 
+void	cleanup(t_data *data)
+{
+	pthread_mutex_destroy(&(data->data_mtx));
+	pthread_mutex_destroy(&(data->msg_mtx));
+}
+
 void	cleanup_data(t_data *data, size_t i)
 {
 	if (!data)
@@ -61,5 +67,6 @@ void	cleanup_data(t_data *data, size_t i)
 	cleanup_philos(data->philos, data->num_of_philo);
 	cleanup_forks(data->forks, data->num_of_philo);
 	cleanup_threads(data->threads, i);
+	cleanup_mutexs(data);
 	free(data);
 }
