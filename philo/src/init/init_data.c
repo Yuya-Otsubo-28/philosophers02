@@ -70,7 +70,8 @@ t_philo	*init_philo(t_data *data, size_t i)
 		philo->left = data->forks[i - 1];
 	philo->eat_count = 0;
 	philo->data = data;
-	// philo->count_mtx = &(data->count_mtx);
+	philo->count_mtx = &(data->count_mtxs[i]);
+	philo->msg_mtx = &(data->msg_mtx);
 	philo->time_to_die = data->time_to_die;
 	philo->time_to_eat = data->time_to_eat;
 	philo->time_to_sleep = data->time_to_sleep;
@@ -147,6 +148,37 @@ t_data	*init_must_eat(t_data *data, int argc, char *argv[])
 	return (data);
 }
 
+t_data	*init_count_mtxs(t_data *data)
+{
+	pthread_mutex_t	*count_mtxs;
+	size_t			i;
+
+	count_mtxs = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * data->num_of_philo);
+	if (!count_mtxs)
+		return (init_error(data));
+	i = 0;
+	while (i < data->num_of_philo)
+	{
+		if (pthread_mutex_init(&(data->count_mtxs[i]), NULL))
+			return (init_error(data));
+		i++;
+	}
+	return (data);
+}
+
+t_data	*init_mutexs(t_data *data)
+{
+	data = init_count_mtxs(data);
+	if (!data)
+		return (init_error(data));
+	data = init_forks(data);
+	if (!data)
+		return (init_error(data));
+	if (pthread_mutex_init(&(data->msg_mtx), NULL))
+		return (init_error(data));
+	return (data);
+}
+
 t_data	*init_data(int argc, char **argv)
 {
 	t_data	*data;
@@ -155,17 +187,13 @@ t_data	*init_data(int argc, char **argv)
 	if (!data)
 		return (data);
 	memset(data, 0, sizeof(t_data));
-	if (pthread_mutex_init(&(data->count_mtx), NULL))
-		return (init_error(data));
-	if (pthread_mutex_init(&data->msg_mtx, NULL))
-		return (init_error(data));
 	data = init_num_datas(data, argv);
 	if (!data)
 		return (NULL);
 	data = init_must_eat(data, argc, argv);
 	if (!data)
 		return (NULL);
-	data = init_forks(data);
+	data = init_mutexs(data);
 	if (!data)
 		return (NULL);
 	data = init_philos(data);
