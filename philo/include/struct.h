@@ -5,14 +5,16 @@
 
 typedef int t_bool;
 
+typedef struct s_mutex {
+	pthread_mutex_t mtx;
+	t_bool			is_init;
+}	t_mutex;
+
 typedef struct s_fork {
-	pthread_mutex_t	mtx;
-	size_t			id;
+	t_mutex	mtx;
+	size_t	id;
 }	t_fork ;
 
-// TODO: philoの中にmsg_mtxを持たせる。
-// TODO: philoの中にlast_eatを持たせる。
-// TODO: philoの中にtime_to_sleepなど不変でよく参照する変数を追加する。
 typedef struct s_philo {
 	t_data			*data;
 	size_t			id;
@@ -28,7 +30,6 @@ typedef struct s_philo {
 }	t_philo ;
 
 // TODO: pthread_mutex_tをラップした構造体を定義し、mutexが初期化されたものかどうかを判定できるようにする。
-// TODO: is_start, is_finishをdataに含める。
 typedef struct s_data {
 	t_philo			**philos;
 	t_fork			**forks;
@@ -41,6 +42,8 @@ typedef struct s_data {
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
+	t_bool			is_start;
+	t_bool			is_finish;
 }	t_data ;
 
 #endif
