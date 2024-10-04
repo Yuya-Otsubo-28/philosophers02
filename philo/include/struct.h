@@ -29,14 +29,13 @@ typedef struct s_philo {
 	int				last_eat;
 }	t_philo ;
 
-// TODO: pthread_mutex_tをラップした構造体を定義し、mutexが初期化されたものかどうかを判定できるようにする。
 typedef struct s_data {
 	t_philo			**philos;
 	t_fork			**forks;
 	pthread_t		*threads;
 	pthread_t		monitor;
-	pthread_mutex_t	*count_mtxs;
-	pthread_mutex_t	msg_mtx;
+	t_mutex			*count_mtxs;
+	t_mutex			msg_mtx;
 	int				num_of_philo;
 	int				must_eat;
 	int				time_to_die;

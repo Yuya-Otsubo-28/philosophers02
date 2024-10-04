@@ -12,6 +12,27 @@
 
 #include "../../include/philo.h"
 
+void	cleanup_mutex(t_mutex *mutex)
+{
+	if (!mutex)
+		return ;
+	if (mutex->is_init)
+		pthread_mutex_destory(&(mutex->mtx));
+	free(mutex);
+}
+
+void	cleanup_mutexs(t_mutex **mutexs, size_t num)
+{
+	size_t	i;
+
+	if (!mutexs)
+		return ;
+	i = 0;
+	while(i < num)
+		cleanup_mutex(mutexs[i++]);
+	free(mutexs);
+}
+
 void	cleanup_philos(t_philo **philos, int num_of_philo)
 {
 	size_t	i;
@@ -28,7 +49,7 @@ void	cleanup_fork(t_fork *fork)
 {
 	if (!fork)
 		return ;
-	pthread_mutex_destroy(&(fork->mtx));
+	cleanup_mutex(fork->mtx);
 	free(fork);
 }
 
@@ -54,12 +75,6 @@ void	cleanup_threads(pthread_t *threads, size_t to_join)
 	free(threads);
 }
 
-void	cleanup(t_data *data)
-{
-	pthread_mutex_destroy(&(data->data_mtx));
-	pthread_mutex_destroy(&(data->msg_mtx));
-}
-
 void	cleanup_data(t_data *data, size_t i)
 {
 	if (!data)
@@ -67,6 +82,7 @@ void	cleanup_data(t_data *data, size_t i)
 	cleanup_philos(data->philos, data->num_of_philo);
 	cleanup_forks(data->forks, data->num_of_philo);
 	cleanup_threads(data->threads, i);
-	cleanup_mutexs(data);
+	cleanup_mutex(data->msg_mtx);
+	cleanup_mutexs(data->count_mtxs);
 	free(data);
 }
