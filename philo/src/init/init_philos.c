@@ -28,8 +28,10 @@ static t_philo	*init_philo(t_data *data, size_t i)
 		philo->left = data->forks[i - 1];
 	philo->eat_count = 0;
 	philo->data = data;
-	philo->count_mtx = &(data->count_mtxs[i]);
-	philo->msg_mtx = &(data->msg_mtx);
+	philo->count_mtx = data->count_mtxs[i];
+	philo->msg_mtx = data->msg_mtx;
+	philo->flag_mtx = data->flag_mtx;
+	philo->time_mtx = data->time_mtx;
 	philo->time_to_die = data->time_to_die;
 	philo->time_to_eat = data->time_to_eat;
 	philo->time_to_sleep = data->time_to_sleep;

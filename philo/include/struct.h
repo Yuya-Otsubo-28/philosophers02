@@ -28,11 +28,12 @@ typedef struct s_philo {
 	t_fork	*left;
 	t_mutex	*count_mtx;
 	t_mutex	*msg_mtx;
+	t_mutex	*flag_mtx;
+	t_mutex	*time_mtx;
 	int		time_to_die;
 	int		time_to_eat;
 	int		time_to_sleep;
 	int		eat_count;
-	long long	start_time;
 	long long	last_eat;
 }	t_philo ;
 
@@ -44,11 +45,13 @@ typedef struct s_data {
 	t_mutex		**count_mtxs;
 	t_mutex		*msg_mtx;
 	t_mutex		*flag_mtx;
+	t_mutex		*time_mtx;
 	int			num_of_philo;
 	int			must_eat;
 	int			time_to_die;
 	int			time_to_eat;
 	int			time_to_sleep;
+	long long	start_time;
 	t_bool		is_start;
 	t_bool		is_finish;
 }	t_data ;
