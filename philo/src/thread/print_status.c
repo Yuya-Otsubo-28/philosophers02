@@ -29,13 +29,13 @@ char	*make_message(int status)
 	return (message);
 }
 
-t_bool	print_status(t_philo *philo, int status)
+void	print_status(t_philo *philo, int status)
 {
 	char	*message;
 	int		now;
 
 	message = make_message(status);
-	time = get_time(philo);
+	now = get_time(philo);
 	if (status == EAT)
 		update_last_eat(philo);
 	pthread_mutex_lock(philo->msg_mtx);

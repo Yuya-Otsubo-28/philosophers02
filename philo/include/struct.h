@@ -43,6 +43,7 @@ typedef struct s_data {
 	pthread_t	monitor;
 	t_mutex		**count_mtxs;
 	t_mutex		*msg_mtx;
+	t_mutex		*flag_mtx;
 	int			num_of_philo;
 	int			must_eat;
 	int			time_to_die;

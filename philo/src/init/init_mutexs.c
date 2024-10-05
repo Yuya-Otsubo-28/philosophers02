@@ -74,5 +74,10 @@ t_data	*set_mutexs(t_data *data)
 		return (init_error(data));
 	if (!init_mutex(data->msg_mtx))
 		return (init_error(data));
+	data->flag_mtx = malloc_mutex();
+	if (!(data->flag_mtx))
+		return (init_error(data));
+	if (!init_mutex(data->flag_mtx))
+		return (init_error(data));
 	return (data);
 }
