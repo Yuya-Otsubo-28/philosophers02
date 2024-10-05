@@ -29,7 +29,7 @@ typedef struct s_philo {
 	t_mutex	*count_mtx;
 	t_mutex	*msg_mtx;
 	t_mutex	*flag_mtx;
-	t_mutex	*time_mtx;
+	t_bool	is_dead;
 	int		time_to_die;
 	int		time_to_eat;
 	int		time_to_sleep;
@@ -45,7 +45,6 @@ typedef struct s_data {
 	t_mutex		**count_mtxs;
 	t_mutex		*msg_mtx;
 	t_mutex		*flag_mtx;
-	t_mutex		*time_mtx;
 	int			num_of_philo;
 	int			must_eat;
 	int			time_to_die;

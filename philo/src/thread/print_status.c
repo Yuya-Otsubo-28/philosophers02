@@ -29,6 +29,13 @@ char	*make_message(int status)
 	return (message);
 }
 
+void	die(t_philo *philo, long long now)
+{
+	pthread_mutex_lock(&(philo->msg_mtx->mtx));
+	printf("%d %zu died\n", now - philo->data->start_time, philo->id);
+	pthread_mutex_unlock(&(philo->msg_mtx->mtx));
+}
+
 void	print_status(t_philo *philo, int status)
 {
 	char	*message;
@@ -36,10 +43,13 @@ void	print_status(t_philo *philo, int status)
 
 	message = make_message(status);
 	now = get_time(philo);
-	if (status == EAT)
-		update_last_eat(philo);
-	pthread_mutex_lock(philo->msg_mtx);
-	printf("%d %zu %s\n", time, philo->id, message);
-	pthread_mutex_unlock(philo->msg_mtx);
+	if (status == EAT && !update_last_eat(philo))
+	{
+		die(philo, now);
+		return ;
+	}
+	pthread_mutex_lock(&(philo->msg_mtx->mtx));
+	printf("%d %zu %s\n", now - philo->data->start_time, philo->id, message);
+	pthread_mutex_unlock(&(philo->msg_mtx->mtx));
 	wait_status(philo, status);
 }
