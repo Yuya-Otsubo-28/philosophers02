@@ -32,10 +32,10 @@ char	*make_message(int status)
 t_bool	print_status(t_philo *philo, int status)
 {
 	char	*message;
-	int		time;
+	int		now;
 
 	message = make_message(status);
-	time = make_time(philo);
+	time = get_time(philo);
 	if (status == EAT)
 		update_last_eat(philo);
 	pthread_mutex_lock(philo->msg_mtx);

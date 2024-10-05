@@ -86,7 +86,7 @@ t_data	*init_data(int argc, char **argv)
 	data = init_must_eat(data, argc, argv);
 	if (!data)
 		return (NULL);
-	data = init_mutexs(data);
+	data = set_mutexs(data);
 	if (!data)
 		return (NULL);
 	data = init_philos(data);
