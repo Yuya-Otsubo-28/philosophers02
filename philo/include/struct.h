@@ -2,6 +2,7 @@
 # define STRUCT_H
 
 # include <pthread.h>
+# include <sys/time.h>
 
 typedef int t_bool;
 
@@ -15,6 +16,11 @@ typedef struct s_fork {
 	size_t	id;
 }	t_fork ;
 
+typedef struct s_time {
+	time_t		tv_sec;
+	suseconds_t	tv_usec;
+}	t_time;
+
 typedef struct s_philo {
 	t_data	*data;
 	size_t	id;
@@ -26,7 +32,8 @@ typedef struct s_philo {
 	int		time_to_eat;
 	int		time_to_sleep;
 	int		eat_count;
-	int		last_eat;
+	long long	start_time;
+	long long	last_eat;
 }	t_philo ;
 
 typedef struct s_data {

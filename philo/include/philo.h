@@ -21,5 +21,6 @@
 # include <pthread.h>
 # include <limits.h>
 # include <string.h>
+# include <sys/time.h>
 
 #endif
