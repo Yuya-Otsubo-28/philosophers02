@@ -21,7 +21,7 @@ int	main(int argc, char *argv[])
 	data = init_data(argc, argv);
 	if (!data)
 		return (main_error(data, 0));
-	launch_threads();
+	launch_threads(data);
 	cleanup(data);
 	return (EXIT_SUCCESS);
 }
