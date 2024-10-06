@@ -12,16 +12,20 @@
 
 #include "../../include/philo.h"
 
-void	take_right_fork(t_philo *philo)
+void	take_fork(t_philo *philo, int hand)
 {
-	pthread_mutex_lock(&(philo->right->mtx));
+	if (hand == RIGHT)
+		pthread_mutex_lock(&(philo->right->mtx));
+	else if (hand == LEFT)
+		pthread_mutex_lock(&(philo->left->mtx));
 	print_status(philo, TAKE);
 }
 
-void	take_left_fork(t_philo *philo)
+void	die(t_philo *philo, long long now)
 {
-	pthread_mutex_lock(&(philo->left->mtx));
-	print_status(philo, TAKE);
+	pthread_mutex_lock(&(philo->msg_mtx->mtx));
+	printf("%d %zu died\n", now - philo->data->start_time, philo->id);
+	pthread_mutex_unlock(&(philo->msg_mtx->mtx));
 }
 
 void	eat(t_philo *philo)

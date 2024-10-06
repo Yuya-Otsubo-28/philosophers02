@@ -26,7 +26,7 @@ static t_data	*init_count_mtxs(t_data *data)
 	return (data);
 }
 
-t_fork	*init_fork(size_t i)
+static t_fork	*init_fork(size_t i)
 {
 	t_fork	*fork;
 
@@ -42,7 +42,7 @@ t_fork	*init_fork(size_t i)
 	return (fork);
 }
 
-t_data	*init_forks(t_data *data)
+static t_data	*init_forks(t_data *data)
 {
 	size_t	i;
 

@@ -12,7 +12,7 @@
 
 #include "../../include/philo.h"
 
-char	*make_message(int status)
+static char	*make_message(int status)
 {
 	char	*message;
 
@@ -27,13 +27,6 @@ char	*make_message(int status)
 	else if (status == DIED)
 		message = "died";
 	return (message);
-}
-
-void	die(t_philo *philo, long long now)
-{
-	pthread_mutex_lock(&(philo->msg_mtx->mtx));
-	printf("%d %zu died\n", now - philo->data->start_time, philo->id);
-	pthread_mutex_unlock(&(philo->msg_mtx->mtx));
 }
 
 void	print_status(t_philo *philo, int status)

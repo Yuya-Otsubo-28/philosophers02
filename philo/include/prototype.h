@@ -15,22 +15,92 @@
 
 # include "struct.h"
 
+// cleanup.c
+
 void	cleanup_data(t_data *data, size_t i);
 
-t_data	*init_data(int argc, char **argv);
+void	cleanup_threads(pthread_t *threads, size_t to_join);
+
+void	cleanup_forks(t_fork **forks, int num_of_philo);
+
+void	cleanup_fork(t_fork *fork);
+
+void	cleanup_philos(t_philo **philos, int num_of_philo);
+
+void	cleanup_mutexs(t_mutex **mutexs, size_t num);
+
+void	cleanup_mutex(t_mutex *mutex);
+
+// error.c
+
+int	main_error(t_data *data, int i);
+
+t_bool	launch_thread_create(t_data *data, size_t i);
+
+t_fork	*init_fork_error(t_fork *fork);
 
 t_data	*init_error(t_data *data);
 
-int	main_error(t_data *data, int errnum);
+// init_data.c
 
-int	ft_isdigit(int c);
+t_data	*init_data(int argc, char **argv);
+
+// init_mutexs.c
+
+t_data	*set_mutexs(t_data *data);
+
+// init_philos.c
+
+t_data *init_philos(t_data *data);
+
+// events.c
+
+void	take_fork(t_philo *philo, int hand);
+
+void	die(t_philo *philo, long long now);
+
+void	eat(t_philo *philo);
+
+void	sleep(t_philo *philo);
+
+void	think(t_philo *philo);
+
+// get_time.c
+
+long long	get_time(void);
+
+// launch_threads.c
+
+t_bool	launch_threads(t_data *data);
+
+// monitor.c
+
+void	*monitor(void *arg);
+
+// print_status.c
+
+void	print_status(t_philo *philo, int status);
+
+// simulation.c
+
+void	*simulation_start(void *arg);
+
+// utils
 
 int	ft_atoi(const char *nptr);
 
-size_t	ft_strlen(const char *s);
+int	ft_isdigit(int c);
 
 int	ft_isspace(char c);
 
-t_bool	launch_thread_create(t_data *data, size_t i);
+size_t	ft_strlen(const char *s);
+
+t_bool	init_mutex(t_mutex *mutex);
+
+t_bool	init_mutexs(t_mutex **mutexs, size_t num);
+
+t_mutex	*malloc_mutex(void);
+
+t_mutex	**malloc_mutexs(size_t num);
 
 #endif
