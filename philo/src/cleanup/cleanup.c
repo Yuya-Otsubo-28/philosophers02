@@ -17,7 +17,7 @@ void	cleanup_mutex(t_mutex *mutex)
 	if (!mutex)
 		return ;
 	if (mutex->is_init)
-		pthread_mutex_destory(&(mutex->mtx));
+		pthread_mutex_destroy(&(mutex->mtx));
 	free(mutex);
 }
 
@@ -49,7 +49,7 @@ void	cleanup_fork(t_fork *fork)
 {
 	if (!fork)
 		return ;
-	cleanup_mutex(fork->mtx);
+	cleanup_mutex(fork->my_mtx);
 	free(fork);
 }
 
@@ -83,6 +83,6 @@ void	cleanup_data(t_data *data, size_t i)
 	cleanup_forks(data->forks, data->num_of_philo);
 	cleanup_threads(data->threads, i);
 	cleanup_mutex(data->msg_mtx);
-	cleanup_mutexs(data->count_mtxs);
+	cleanup_mutexs(data->count_mtxs, data->num_of_philo);
 	free(data);
 }

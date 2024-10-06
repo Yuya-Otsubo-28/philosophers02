@@ -24,6 +24,7 @@ static void	*set_finish(t_data *data)
 	pthread_mutex_lock(&(data->flag_mtx->mtx));
 	data->is_finish = TRUE;
 	pthread_mutex_unlock(&(data->flag_mtx->mtx));
+	return (NULL);
 }
 
 void	*monitor(void *arg)
@@ -38,7 +39,7 @@ void	*monitor(void *arg)
 	{
 		i = 0;
 		totla_eat = 0;
-		while (i < data->num_of_philo)
+		while (i < (size_t)data->num_of_philo)
 		{
 			pthread_mutex_lock(&(data->count_mtxs[i]->mtx));
 			if (data->philos[i]->is_dead)
@@ -51,7 +52,7 @@ void	*monitor(void *arg)
 			pthread_mutex_unlock(&(data->count_mtxs[i]->mtx));
 			i++;
 		}
-		if (totla_eat == data->num_of_philo)
+		if (totla_eat == (size_t)data->num_of_philo)
 			return (set_finish(data));
 	}
 }

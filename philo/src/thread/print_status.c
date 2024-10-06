@@ -12,6 +12,14 @@
 
 #include "../../include/philo.h"
 
+static t_bool	update_last_eat(t_philo *philo, long long now)
+{
+	if (now - philo->last_eat > philo->time_to_die)
+		return (FALSE);
+	philo->last_eat = now;
+	return (TRUE);
+}
+
 static char	*make_message(int status)
 {
 	char	*message;
@@ -35,14 +43,13 @@ void	print_status(t_philo *philo, int status)
 	int		now;
 
 	message = make_message(status);
-	now = get_time(philo);
-	if (status == EAT && !update_last_eat(philo))
+	now = get_time();
+	if (status == EAT && !update_last_eat(philo, now))
 	{
-		die(philo, now);
+		died(philo, now);
 		return ;
 	}
 	pthread_mutex_lock(&(philo->msg_mtx->mtx));
-	printf("%d %zu %s\n", now - philo->data->start_time, philo->id, message);
+	printf("%lld %zu %s\n", now - philo->data->start_time, philo->id, message);
 	pthread_mutex_unlock(&(philo->msg_mtx->mtx));
-	wait_status(philo, status);
 }

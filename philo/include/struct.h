@@ -6,23 +6,20 @@
 
 typedef int t_bool;
 
+typedef struct timeval t_time;
+
 typedef struct s_mutex {
 	pthread_mutex_t mtx;
 	t_bool			is_init;
 }	t_mutex;
 
 typedef struct s_fork {
-	t_mutex	mtx;
+	t_mutex	*my_mtx;
 	size_t	id;
 }	t_fork ;
 
-typedef struct s_time {
-	time_t		tv_sec;
-	suseconds_t	tv_usec;
-}	t_time;
-
 typedef struct s_philo {
-	t_data	*data;
+	struct s_data	*data;
 	size_t	id;
 	t_fork	*right;
 	t_fork	*left;

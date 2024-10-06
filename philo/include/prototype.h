@@ -35,7 +35,7 @@ void	cleanup_mutex(t_mutex *mutex);
 
 int	main_error(t_data *data, int i);
 
-t_bool	launch_thread_create(t_data *data, size_t i);
+t_bool	launch_threads_error(t_data *data, size_t i);
 
 t_fork	*init_fork_error(t_fork *fork);
 
@@ -55,15 +55,15 @@ t_data *init_philos(t_data *data);
 
 // events.c
 
-void	take_fork(t_philo *philo, int hand);
+void	taking_fork(t_philo *philo, int hand);
 
-void	die(t_philo *philo, long long now);
+void	died(t_philo *philo, long long now);
 
-void	eat(t_philo *philo);
+void	eating(t_philo *philo);
 
-void	sleep(t_philo *philo);
+void	sleeping(t_philo *philo);
 
-void	think(t_philo *philo);
+void	thinking(t_philo *philo);
 
 // get_time.c
 

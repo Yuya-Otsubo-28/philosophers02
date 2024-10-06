@@ -18,10 +18,10 @@ t_bool	launch_threads(t_data *data)
 
 	if (!data->num_of_philo)
 		return (launch_threads_error(data, 0));
-	if (data->num_of_philo == 1)
-		return (only_one_philo(data));
+	// if (data->num_of_philo == 1)
+	// 	return (only_one_philo(data));
 	i = 0;
-	while (i < data->num_of_philo)
+	while (i < (size_t)data->num_of_philo)
 	{
 		if (pthread_create(&(data->threads[i]), NULL, simulation_start, data->philos[i]))
 			return (launch_threads_error(data, i));

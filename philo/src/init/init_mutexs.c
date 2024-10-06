@@ -14,13 +14,12 @@
 
 static t_data	*init_count_mtxs(t_data *data)
 {
-	mutex_t	**count_mtxs;
-	size_t	i;
+	t_mutex	**count_mtxs;
 
 	count_mtxs = malloc_mutexs(data->num_of_philo);
 	if (!count_mtxs)
 		return (init_error(data));
-	if (!init_mutexs(count_mutexs, data->num_of_philo));
+	if (!init_mutexs(count_mtxs, data->num_of_philo))
 		return (init_error(data));
 	data->count_mtxs = count_mtxs;
 	return (data);
@@ -33,10 +32,10 @@ static t_fork	*init_fork(size_t i)
 	fork = (t_fork *)malloc(sizeof(t_fork));
 	if (!fork)
 		return (NULL);
-	fork->mtx = malloc_mutex();
-	if (!(fork->mtx))
+	fork->my_mtx = malloc_mutex();
+	if (!(fork->my_mtx))
 		return (init_fork_error(fork));
-	if (!init_mutex(fork->mtx))
+	if (!init_mutex(fork->my_mtx))
 		return (init_fork_error(fork));
 	fork->id = i;
 	return (fork);

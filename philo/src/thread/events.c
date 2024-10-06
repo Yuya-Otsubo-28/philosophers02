@@ -12,35 +12,35 @@
 
 #include "../../include/philo.h"
 
-void	take_fork(t_philo *philo, int hand)
+void	taking_fork(t_philo *philo, int hand)
 {
 	if (hand == RIGHT)
-		pthread_mutex_lock(&(philo->right->mtx));
+		pthread_mutex_lock(&(philo->right->my_mtx->mtx));
 	else if (hand == LEFT)
-		pthread_mutex_lock(&(philo->left->mtx));
+		pthread_mutex_lock(&(philo->left->my_mtx->mtx));
 	print_status(philo, TAKE);
 }
 
-void	die(t_philo *philo, long long now)
+void	died(t_philo *philo, long long now)
 {
 	pthread_mutex_lock(&(philo->msg_mtx->mtx));
-	printf("%d %zu died\n", now - philo->data->start_time, philo->id);
+	printf("%lld %zu died\n", now - philo->data->start_time, philo->id);
 	pthread_mutex_unlock(&(philo->msg_mtx->mtx));
 }
 
-void	eat(t_philo *philo)
+void	eating(t_philo *philo)
 {
 	print_status(philo, EAT);
 	usleep(philo->time_to_eat * 1e3);
 }
 
-void	sleep(t_philo *philo)
+void	sleeping(t_philo *philo)
 {
 	print_status(philo, SLEEP);
 	usleep(philo->time_to_sleep * 1e3);
 }
 
-void	think(t_philo *philo)
+void	thinking(t_philo *philo)
 {
 	print_status(philo, THINK);
 	usleep(100);
