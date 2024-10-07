@@ -30,38 +30,39 @@ t_mutex	**malloc_mutexs(size_t num)
 
 	mutexs = (t_mutex **)malloc(sizeof(t_mutex *) * num);
 	if (!mutexs)
-		return (mutexs_error(mutexs));
+		return (mutexs_error(mutexs, num));
 	memset(mutexs, 0, sizeof(t_mutex *) * num);
 	i = 0;
 	while (i < num)
 	{
 		mutexs[i] = malloc_mutex();
 		if (!mutexs[i])
-			return (malloc_mutexs_error(mutexs));
+			return (mutexs_error(mutexs, num));
 		mutexs[i]->is_init = FALSE;
 		i++;
 	}
 	return (mutexs);
 }
 
-t_bool	init_mutex(t_mutex *mutex)
+t_mutex	*init_mutex(t_mutex *mutex)
 {
 	if (!pthread_mutex_init(&(mutex->mtx), NULL))
-		return (FALSE);
+		return (mutex_error(mutex));
 	mutex->is_init = TRUE;
-	return (TRUE);
+	return (mutex);
 }
 
-t_bool	init_mutexs(t_mutex **mutexs, size_t num)
+t_mutex	**init_mutexs(t_mutex **mutexs, size_t num)
 {
 	size_t	i;
 
 	i = 0;
 	while (i < num)
 	{
-		if (!init_mutex(mutexs[i]))
-			return (init_mutexs_error(mutexs));
+		mutexs[i] = init_mutex(mutexs[i]);
+		if (!mutexs[i])
+			return (mutexs_error(mutexs, num));
 		i++;
 	}
-	return (TRUE);
+	return (mutexs);
 }

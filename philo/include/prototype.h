@@ -33,13 +33,17 @@ void	cleanup_mutex(t_mutex *mutex);
 
 // error.c
 
-int	main_error(t_data *data, int i);
+int	main_error(t_data *data);
 
 t_bool	launch_threads_error(t_data *data, size_t i);
 
 t_fork	*init_fork_error(t_fork *fork);
 
 t_data	*init_error(t_data *data);
+
+t_mutex	**mutexs_error(t_mutex **mutexs, size_t num);
+
+t_mutex	*mutex_error(t_mutex *mutex);
 
 // init_data.c
 
@@ -95,9 +99,9 @@ int	ft_isspace(char c);
 
 size_t	ft_strlen(const char *s);
 
-t_bool	init_mutex(t_mutex *mutex);
+t_mutex	*init_mutex(t_mutex *mutex);
 
-t_bool	init_mutexs(t_mutex **mutexs, size_t num);
+t_mutex	**init_mutexs(t_mutex **mutexs, size_t num);
 
 t_mutex	*malloc_mutex(void);
 
