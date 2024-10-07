@@ -18,6 +18,11 @@ void	taking_fork(t_philo *philo, int hand)
 		pthread_mutex_lock(&(philo->right->my_mtx->mtx));
 	else if (hand == LEFT)
 		pthread_mutex_lock(&(philo->left->my_mtx->mtx));
+	if (get_time() >= philo->last_eat + philo->time_to_die)
+	{
+		died(philo, get_time());
+		return ;
+	}
 	print_status(philo, TAKE);
 }
 
@@ -27,6 +32,11 @@ void	died(t_philo *philo, long long now)
 	philo->is_dead = TRUE;
 	pthread_mutex_unlock(&(philo->count_mtx->mtx));
 	pthread_mutex_lock(&(philo->msg_mtx->mtx));
+	if (!(philo->is_dead) && is_finish(philo))
+	{
+		pthread_mutex_unlock(&(philo->msg_mtx->mtx));
+		return ;
+	}
 	printf(RED);
 	printf("%lld %zu died\n", now - philo->data->start_time, philo->id);
 	printf(RESET);
@@ -36,13 +46,17 @@ void	died(t_philo *philo, long long now)
 void	eating(t_philo *philo)
 {
 	print_status(philo, EAT);
-	usleep(philo->time_to_eat * 1e3);
+	if (sleep_until_death(philo, get_time() + philo->time_to_eat) == DEAD)
+		died(philo, get_time());
+	// usleep(philo->time_to_eat * 1e3);
 }
 
 void	sleeping(t_philo *philo)
 {
 	print_status(philo, SLEEP);
-	usleep(philo->time_to_sleep * 1e3);
+	if (sleep_until_death(philo, get_time() + philo->time_to_sleep) == DEAD)
+		died(philo, get_time());
+	// usleep(philo->time_to_sleep * 1e3);
 }
 
 void	thinking(t_philo *philo)

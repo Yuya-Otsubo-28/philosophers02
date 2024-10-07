@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:53:14 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/07 13:41:40 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/10/07 14:06:59 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,24 @@ static void	even_simulation(t_philo *philo)
 	{
 		taking_fork(philo, RIGHT);
 		if (is_finish(philo))
+		{
+			pthread_mutex_unlock(&(philo->right->my_mtx->mtx));
 			break ;
+		}
 		taking_fork(philo, LEFT);
 		if (is_finish(philo))
+		{
+			pthread_mutex_unlock(&(philo->right->my_mtx->mtx));
+			pthread_mutex_unlock(&(philo->left->my_mtx->mtx));
 			break ;
+		}
 		eating(philo);
 		if (is_finish(philo))
+		{
+			pthread_mutex_unlock(&(philo->right->my_mtx->mtx));
+			pthread_mutex_unlock(&(philo->left->my_mtx->mtx));
 			break ;
+		}
 		pthread_mutex_unlock(&(philo->left->my_mtx->mtx));
 		pthread_mutex_unlock(&(philo->right->my_mtx->mtx));
 		if (is_finish(philo))
@@ -56,13 +67,24 @@ static void	odd_simulation(t_philo *philo)
 	{
 		taking_fork(philo, LEFT);
 		if (is_finish(philo))
+		{
+			pthread_mutex_unlock(&(philo->left->my_mtx->mtx));
 			break ;
+		}
 		taking_fork(philo, RIGHT);
 		if (is_finish(philo))
+		{
+			pthread_mutex_unlock(&(philo->left->my_mtx->mtx));
+			pthread_mutex_unlock(&(philo->right->my_mtx->mtx));
 			break ;
+		}
 		eating(philo);
 		if (is_finish(philo))
+		{
+			pthread_mutex_unlock(&(philo->left->my_mtx->mtx));
+			pthread_mutex_unlock(&(philo->right->my_mtx->mtx));
 			break ;
+		}
 		pthread_mutex_unlock(&(philo->right->my_mtx->mtx));
 		pthread_mutex_unlock(&(philo->left->my_mtx->mtx));
 		if (is_finish(philo))
