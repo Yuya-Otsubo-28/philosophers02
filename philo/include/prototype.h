@@ -109,4 +109,6 @@ t_mutex	*malloc_mutex(void);
 
 t_mutex	**malloc_mutexs(size_t num);
 
+int		sleep_until_death(t_philo *philo, long long time);
+
 #endif
