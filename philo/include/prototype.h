@@ -87,6 +87,8 @@ void	print_status(t_philo *philo, int status);
 
 // simulation.c
 
+t_bool	is_finish(t_philo *philo);
+
 void	*simulation_start(void *arg);
 
 // utils

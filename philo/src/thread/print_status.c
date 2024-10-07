@@ -57,6 +57,11 @@ void	print_status(t_philo *philo, int status)
 	}
 	pthread_mutex_lock(&(philo->msg_mtx->mtx));
 	message = make_message(status);
+	if (is_finish(philo))
+	{
+		pthread_mutex_unlock(&(philo->msg_mtx->mtx));
+		return ;
+	}
 	printf("%lld %zu %s\n", now - philo->data->start_time, philo->id, message);
 	printf(RESET);
 	pthread_mutex_unlock(&(philo->msg_mtx->mtx));

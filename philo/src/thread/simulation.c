@@ -6,13 +6,13 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:53:14 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/07 12:26:28 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/10/07 13:41:40 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philo.h"
 
-static t_bool	is_finish(t_philo *philo)
+t_bool	is_finish(t_philo *philo)
 {
 	pthread_mutex_lock(&(philo->flag_mtx->mtx));
 	if (philo->data->is_finish)
