@@ -14,11 +14,14 @@
 # define PHILO_H
 
 # include "struct.h"
+# include "macro.h"
 # include "prototype.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <pthread.h>
+# include <unistd.h>
 # include <limits.h>
 # include <string.h>
+# include <sys/time.h>
 
 #endif
