@@ -39,8 +39,8 @@ static char	*make_message(int status)
 
 void	print_status(t_philo *philo, int status)
 {
-	char	*message;
-	int		now;
+	char		*message;
+	long long	now;
 
 	message = make_message(status);
 	now = get_time();

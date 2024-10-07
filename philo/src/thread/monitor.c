@@ -16,6 +16,7 @@ static void	set_start(t_data *data)
 {
 	pthread_mutex_lock(&(data->flag_mtx->mtx));
 	data->is_start = TRUE;
+	data->start_time = get_time();
 	pthread_mutex_unlock(&(data->flag_mtx->mtx));
 }
 
@@ -47,7 +48,7 @@ void	*monitor(void *arg)
 				pthread_mutex_unlock(&(data->count_mtxs[i]->mtx));
 				return (set_finish(data));
 			}
-			if (data->philos[i]->eat_count >= data->must_eat)
+			if (data->must_eat > 0 && data->philos[i]->eat_count >= data->must_eat)
 				totla_eat++;
 			pthread_mutex_unlock(&(data->count_mtxs[i]->mtx));
 			i++;

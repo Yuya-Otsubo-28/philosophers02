@@ -78,7 +78,7 @@ t_data	*init_data(int argc, char **argv)
 
 	data = (t_data *)malloc(sizeof(t_data));
 	if (!data)
-		return (data);
+		return (NULL);
 	memset(data, 0, sizeof(t_data));
 	data = init_num_datas(data, argv);
 	if (!data)
@@ -95,5 +95,7 @@ t_data	*init_data(int argc, char **argv)
 	data = init_threads(data);
 	if (!data)
 		return (NULL);
+	data->is_finish = FALSE;
+	data->is_start = FALSE;
 	return (data);
 }

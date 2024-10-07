@@ -34,6 +34,7 @@ static t_philo	*init_philo(t_data *data, size_t i)
 	philo->time_to_die = data->time_to_die;
 	philo->time_to_eat = data->time_to_eat;
 	philo->time_to_sleep = data->time_to_sleep;
+	philo->is_dead = FALSE;
 	return (philo);
 }
 

@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:53:14 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/06 22:28:41 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/10/07 12:26:28 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,9 @@ void	*simulation_start(void *arg)
 		}
 		pthread_mutex_unlock(&(philo->flag_mtx->mtx));
 	}
+	philo->last_eat = get_time();
+	pthread_mutex_lock(&(philo->msg_mtx->mtx));
+	pthread_mutex_unlock(&(philo->msg_mtx->mtx));
 	if (philo->id % 2)
 		even_simulation(philo);
 	else

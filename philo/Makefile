@@ -12,7 +12,7 @@
 
 NAME		= philo
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -lpthread
+CFLAGS		= -Wall -Wextra -Werror -pthread
 SRCS		= ./src/cleanup/cleanup.c \
 				./src/error/error.c \
 				./src/init/init_data.c \

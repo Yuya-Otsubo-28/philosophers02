@@ -46,7 +46,7 @@ t_mutex	**malloc_mutexs(size_t num)
 
 t_mutex	*init_mutex(t_mutex *mutex)
 {
-	if (!pthread_mutex_init(&(mutex->mtx), NULL))
+	if (pthread_mutex_init(&(mutex->mtx), NULL) < 0)
 		return (mutex_error(mutex));
 	mutex->is_init = TRUE;
 	return (mutex);
