@@ -34,7 +34,7 @@ static char	*make_message(int status)
 	else if (status == SLEEP)
 	{
 		printf(BLUE);
-		message = "is sleepig";
+		message = "is sleeping";
 	}
 	else if (status == THINK)
 	{
