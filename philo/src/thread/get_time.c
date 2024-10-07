@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   get_time.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/30 20:34:13 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/09/30 20:34:13 by yotsubo          ###   ########.fr       */
+/*   Created: 2024/10/06 00:58:15 by yotsubo           #+#    #+#             */
+/*   Updated: 2024/10/06 00:58:15 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#include "../../include/philo.h"
 
-# include "struct.h"
-# include "macro.h"
-# include "prototype.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <pthread.h>
-# include <unistd.h>
-# include <limits.h>
-# include <string.h>
-# include <sys/time.h>
+long long	get_time(void)
+{
+	long long	res;
+	t_time		time;
 
-#endif
+	gettimeofday(&time, NULL);
+	res = time.tv_sec * 1e3;
+	res += time.tv_usec / 1e3;
+	return (res);
+}
