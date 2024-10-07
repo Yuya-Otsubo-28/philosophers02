@@ -24,7 +24,9 @@ void	taking_fork(t_philo *philo, int hand)
 void	died(t_philo *philo, long long now)
 {
 	pthread_mutex_lock(&(philo->msg_mtx->mtx));
+	printf(RED);
 	printf("%lld %zu died\n", now - philo->data->start_time, philo->id);
+	printf(RESET);
 	pthread_mutex_unlock(&(philo->msg_mtx->mtx));
 }
 

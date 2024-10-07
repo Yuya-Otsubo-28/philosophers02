@@ -27,13 +27,20 @@ static char	*make_message(int status)
 	if (status == TAKE)
 		message = "has taken a fork";
 	else if (status == EAT)
+	{
+		printf(YELLOW);
 		message = "is eating";
+	}
 	else if (status == SLEEP)
-		message = "is sleepig";
+	{
+		printf(BLUE);
+		message = "is sleeping";
+	}
 	else if (status == THINK)
+	{
+		printf(GREEN);
 		message = "is thinking";
-	else if (status == DIED)
-		message = "died";
+	}
 	return (message);
 }
 
@@ -42,7 +49,6 @@ void	print_status(t_philo *philo, int status)
 	char		*message;
 	long long	now;
 
-	message = make_message(status);
 	now = get_time();
 	if (status == EAT && !update_last_eat(philo, now))
 	{
@@ -50,6 +56,8 @@ void	print_status(t_philo *philo, int status)
 		return ;
 	}
 	pthread_mutex_lock(&(philo->msg_mtx->mtx));
+	message = make_message(status);
 	printf("%lld %zu %s\n", now - philo->data->start_time, philo->id, message);
+	printf(RESET);
 	pthread_mutex_unlock(&(philo->msg_mtx->mtx));
 }
