@@ -26,23 +26,6 @@ void	taking_fork(t_philo *philo, int hand)
 	print_status(philo, TAKE);
 }
 
-void	died(t_philo *philo, long long now)
-{
-	pthread_mutex_lock(&(philo->count_mtx->mtx));
-	philo->is_dead = TRUE;
-	pthread_mutex_unlock(&(philo->count_mtx->mtx));
-	pthread_mutex_lock(&(philo->msg_mtx->mtx));
-	if (!(philo->is_dead) && is_finish(philo))
-	{
-		pthread_mutex_unlock(&(philo->msg_mtx->mtx));
-		return ;
-	}
-	printf(RED);
-	printf("%lld %zu died\n", now - philo->data->start_time, philo->id);
-	printf(RESET);
-	pthread_mutex_unlock(&(philo->msg_mtx->mtx));
-}
-
 void	eating(t_philo *philo)
 {
 	print_status(philo, EAT);
