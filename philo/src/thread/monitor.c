@@ -44,9 +44,8 @@ void	all_philos_mutex_lock(t_data *data, size_t num)
 	i = 0;
 	while (i < (size_t)data->num_of_philo)
 	{
-		if (i == num)
-			continue ;
-		pthread_mutex_lock(&(data->count_mtxs[i]->mtx));
+		if (i != num)
+			pthread_mutex_lock(&(data->count_mtxs[i]->mtx));
 		i++;
 	}
 }
@@ -57,7 +56,10 @@ void	all_philos_mutex_unlock(t_data *data)
 
 	i = 0;
 	while (i < (size_t)data->num_of_philo)
-		pthread_mutex_unlock(&(data->count_mtxs[i++]->mtx));
+	{
+		pthread_mutex_unlock(&(data->count_mtxs[i]->mtx));
+		i++;
+	}
 }
 
 void	died(t_data *data, size_t i, long long now)
@@ -77,12 +79,11 @@ static t_bool	is_philo_dead(t_data *data, size_t i)
 	long long	now;
 
 	now = get_time();
-	if (now - data->philos[i]->last_eat >= data->philos[i]->time_to_die)
+	if (data->philos[i]->last_eat && now - data->philos[i]->last_eat >= data->philos[i]->time_to_die)
 	{
 		all_philos_mutex_lock(data, i);
 		set_all_philo_dead(data);
 		pthread_mutex_lock(&(data->msg_mtx->mtx));
-		printf("%zu\n", i); fflush(stdout);
 		pthread_mutex_unlock(&(data->msg_mtx->mtx));
 		died(data, i, now);
 		all_philos_mutex_unlock(data);
