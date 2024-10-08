@@ -14,9 +14,10 @@
 
 static t_bool	update_last_eat(t_philo *philo, long long now)
 {
-	if (now - philo->last_eat > philo->time_to_die)
-		return (FALSE);
+	pthread_mutex_lock(&(philo->count_mtx->mtx));
 	philo->last_eat = now;
+	philo->eat_count++;
+	pthread_mutex_unlock(&(philo->count_mtx->mtx));
 	return (TRUE);
 }
 
@@ -50,11 +51,8 @@ void	print_status(t_philo *philo, int status)
 	long long	now;
 
 	now = get_time();
-	if (status == EAT && !update_last_eat(philo, now))
-	{
-		died(philo, now);
-		return ;
-	}
+	if (status == EAT)
+		update_last_eat(philo, now);
 	pthread_mutex_lock(&(philo->msg_mtx->mtx));
 	message = make_message(status);
 	if (is_finish(philo))

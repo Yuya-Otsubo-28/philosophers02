@@ -18,28 +18,19 @@ void	taking_fork(t_philo *philo, int hand)
 		pthread_mutex_lock(&(philo->right->my_mtx->mtx));
 	else if (hand == LEFT)
 		pthread_mutex_lock(&(philo->left->my_mtx->mtx));
-	if (get_time() >= philo->last_eat + philo->time_to_die)
-	{
-		died(philo, get_time());
-		return ;
-	}
 	print_status(philo, TAKE);
 }
 
 void	eating(t_philo *philo)
 {
 	print_status(philo, EAT);
-	if (sleep_until_death(philo, get_time() + philo->time_to_eat) == DEAD)
-		died(philo, get_time());
-	// usleep(philo->time_to_eat * 1e3);
+	usleep(philo->time_to_eat * 1e3);
 }
 
 void	sleeping(t_philo *philo)
 {
 	print_status(philo, SLEEP);
-	if (sleep_until_death(philo, get_time() + philo->time_to_sleep) == DEAD)
-		died(philo, get_time());
-	// usleep(philo->time_to_sleep * 1e3);
+	usleep(philo->time_to_sleep * 1e3);
 }
 
 void	thinking(t_philo *philo)

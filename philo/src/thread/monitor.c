@@ -33,23 +33,8 @@ void	set_all_philo_dead(t_data *data)
 	size_t	i;
 
 	i = 0;
-	while (i < data->num_of_philo)
+	while (i < (size_t)data->num_of_philo)
 		data->philos[i++]->is_dead = TRUE;
-}
-
-static t_bool	is_philo_dead(t_data *data, size_t i)
-{
-	long long	now;
-
-	now = get_time();
-	if (now - data->philos[i]->last_eat >= data->philos[i]->time_to_die)
-	{
-		all_philos_mutex_lock(data, i);
-		set_all_philo_dead(data);
-		died(data, i, now);
-		return (TRUE);
-	}
-	return (FALSE);
 }
 
 void	all_philos_mutex_lock(t_data *data, size_t num)
@@ -57,7 +42,7 @@ void	all_philos_mutex_lock(t_data *data, size_t num)
 	size_t	i;
 
 	i = 0;
-	while (i < data->num_of_philo)
+	while (i < (size_t)data->num_of_philo)
 	{
 		if (i == num)
 			continue ;
@@ -71,17 +56,39 @@ void	all_philos_mutex_unlock(t_data *data)
 	size_t	i;
 
 	i = 0;
-	while (i < data->num_of_philo)
+	while (i < (size_t)data->num_of_philo)
 		pthread_mutex_unlock(&(data->count_mtxs[i++]->mtx));
 }
 
 void	died(t_data *data, size_t i, long long now)
 {
 	pthread_mutex_lock(&(data->msg_mtx->mtx));
-	printf(RESET);
-	printf("%lld %zu died\n", get_time() - now, i);
+	pthread_mutex_lock(&(data->flag_mtx->mtx));
 	printf(RED);
+	printf("%lld %zu died\n", now - data->start_time, i);
+	printf(RESET);
+	data->is_finish = TRUE;
+	pthread_mutex_unlock(&(data->flag_mtx->mtx));
 	pthread_mutex_unlock(&(data->msg_mtx->mtx));
+}
+
+static t_bool	is_philo_dead(t_data *data, size_t i)
+{
+	long long	now;
+
+	now = get_time();
+	if (now - data->philos[i]->last_eat >= data->philos[i]->time_to_die)
+	{
+		all_philos_mutex_lock(data, i);
+		set_all_philo_dead(data);
+		pthread_mutex_lock(&(data->msg_mtx->mtx));
+		printf("%zu\n", i); fflush(stdout);
+		pthread_mutex_unlock(&(data->msg_mtx->mtx));
+		died(data, i, now);
+		all_philos_mutex_unlock(data);
+		return (TRUE);
+	}
+	return (FALSE);
 }
 
 void	*monitor(void *arg)
@@ -99,11 +106,8 @@ void	*monitor(void *arg)
 		while (i < (size_t)data->num_of_philo)
 		{
 			pthread_mutex_lock(&(data->count_mtxs[i]->mtx));
-			if (is_philo_dead(data, i))
-			{
-				all_philos_mutex_unlock(data);
-				return (set_finish(data));
-			}
+			if (is_philo_dead(data, i) == TRUE)
+				return (NULL);
 			if (data->must_eat > 0 && data->philos[i]->eat_count >= data->must_eat)
 				totla_eat++;
 			pthread_mutex_unlock(&(data->count_mtxs[i]->mtx));

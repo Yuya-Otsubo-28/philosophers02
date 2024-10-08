@@ -61,7 +61,7 @@ t_data *init_philos(t_data *data);
 
 void	taking_fork(t_philo *philo, int hand);
 
-void	died(t_philo *philo, long long now);
+void	died(t_data *data, size_t i, long long now);
 
 void	eating(t_philo *philo);
 
