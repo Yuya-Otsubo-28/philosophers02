@@ -36,5 +36,5 @@ void	sleeping(t_philo *philo)
 void	thinking(t_philo *philo)
 {
 	print_status(philo, THINK);
-	my_usleep(500);
+	my_usleep(1e3);
 }
