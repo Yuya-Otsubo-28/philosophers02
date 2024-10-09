@@ -6,7 +6,7 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:53:14 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/08 17:40:25 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/10/08 17:49:18 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,9 @@ static void	odd_simulation(t_philo *philo)
 {
 	while (1)
 	{
+		thinking(philo);
+		if (is_finish(philo))
+			break ;
 		taking_fork(philo, LEFT);
 		if (is_finish(philo))
 		{
@@ -90,9 +93,6 @@ static void	odd_simulation(t_philo *philo)
 		if (is_finish(philo))
 			break ;
 		sleeping(philo);
-		if (is_finish(philo))
-			break ;
-		thinking(philo);
 		if (is_finish(philo))
 			break ;
 	}

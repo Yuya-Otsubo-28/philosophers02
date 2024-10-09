@@ -71,7 +71,9 @@ void	thinking(t_philo *philo);
 
 // get_time.c
 
-long long	get_time(void);
+long long	get_mtime(void);
+
+long long 	get_utime(void);
 
 // launch_threads.c
 
@@ -110,5 +112,7 @@ t_mutex	*malloc_mutex(void);
 t_mutex	**malloc_mutexs(size_t num);
 
 int		sleep_until_death(t_philo *philo, long long time);
+
+void	my_usleep(long long time);
 
 #endif

@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sleep_until_death.c                                :+:      :+:    :+:   */
+/*   my_usleep.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/07 13:48:22 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/10/07 13:48:22 by yotsubo          ###   ########.fr       */
+/*   Created: 2024/10/09 13:10:48 by yotsubo           #+#    #+#             */
+/*   Updated: 2024/10/09 13:10:48 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philo.h"
 
-int	sleep_until_death(t_philo *philo, long long time)
+void	my_usleep(long long time)
 {
 	long long	now;
-	long long	death_time;
+	long long	end_time;
 
-	death_time = philo->last_eat + philo->time_to_die;
-	while(1)
+	end_time = get_utime() + time;
+	while (1)
 	{
-		now = get_mtime();
-		if (now >= time)
+		now = get_utime();
+		if (now >= end_time)
 			break ;
-		if (now >= death_time)
-			return (DEAD);
 		usleep(1);
 	}
-	return (ALIVE);
 }

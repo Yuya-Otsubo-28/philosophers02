@@ -30,6 +30,7 @@ SRCS		= ./src/cleanup/cleanup.c \
 				./src/utils/ft_strlen.c \
 				./src/utils/my_mutex.c \
 				./src/utils/sleep_until_death.c \
+				./src/utils/my_usleep.c \
 				./src/main.c
 OBJS		= $(SRCS:.c=.o)
 INCLUDES	= -I./include

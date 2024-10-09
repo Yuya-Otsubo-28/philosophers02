@@ -50,7 +50,7 @@ void	print_status(t_philo *philo, int status)
 	char		*message;
 	long long	now;
 
-	now = get_time();
+	now = get_mtime();
 	if (status == EAT)
 		update_last_eat(philo, now);
 	pthread_mutex_lock(&(philo->msg_mtx->mtx));

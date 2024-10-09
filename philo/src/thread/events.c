@@ -24,17 +24,17 @@ void	taking_fork(t_philo *philo, int hand)
 void	eating(t_philo *philo)
 {
 	print_status(philo, EAT);
-	usleep(philo->time_to_eat * 1e3);
+	my_usleep(philo->time_to_eat * 1e3);
 }
 
 void	sleeping(t_philo *philo)
 {
 	print_status(philo, SLEEP);
-	usleep(philo->time_to_sleep * 1e3);
+	my_usleep(philo->time_to_sleep * 1e3);
 }
 
 void	thinking(t_philo *philo)
 {
 	print_status(philo, THINK);
-	usleep(500);
+	my_usleep(500);
 }

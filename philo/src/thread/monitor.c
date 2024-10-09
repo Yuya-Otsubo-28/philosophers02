@@ -16,7 +16,7 @@ static void	set_start(t_data *data)
 {
 	pthread_mutex_lock(&(data->flag_mtx->mtx));
 	data->is_start = TRUE;
-	data->start_time = get_time();
+	data->start_time = get_mtime();
 	pthread_mutex_unlock(&(data->flag_mtx->mtx));
 }
 
@@ -78,7 +78,7 @@ static t_bool	is_philo_dead(t_data *data, size_t i)
 {
 	long long	now;
 
-	now = get_time();
+	now = get_mtime();
 	if (data->philos[i]->last_eat && now - data->philos[i]->last_eat >= data->philos[i]->time_to_die)
 	{
 		all_philos_mutex_lock(data, i);
