@@ -61,7 +61,7 @@ t_data *init_philos(t_data *data);
 
 void	taking_fork(t_philo *philo, int hand);
 
-void	died(t_philo *philo, long long now);
+void	died(t_data *data, size_t i, long long now);
 
 void	eating(t_philo *philo);
 
@@ -71,7 +71,9 @@ void	thinking(t_philo *philo);
 
 // get_time.c
 
-long long	get_time(void);
+long long	get_mtime(void);
+
+long long 	get_utime(void);
 
 // launch_threads.c
 
@@ -86,6 +88,8 @@ void	*monitor(void *arg);
 void	print_status(t_philo *philo, int status);
 
 // simulation.c
+
+t_bool	is_finish(t_philo *philo);
 
 void	*simulation_start(void *arg);
 
@@ -106,5 +110,9 @@ t_mutex	**init_mutexs(t_mutex **mutexs, size_t num);
 t_mutex	*malloc_mutex(void);
 
 t_mutex	**malloc_mutexs(size_t num);
+
+int		sleep_until_death(t_philo *philo, long long time);
+
+void	my_usleep(long long time);
 
 #endif
