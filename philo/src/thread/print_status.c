@@ -16,7 +16,6 @@ static t_bool	update_last_eat(t_philo *philo, long long now)
 {
 	pthread_mutex_lock(&(philo->count_mtx->mtx));
 	philo->last_eat = now;
-	philo->eat_count++;
 	pthread_mutex_unlock(&(philo->count_mtx->mtx));
 	return (TRUE);
 }

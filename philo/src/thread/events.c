@@ -25,6 +25,9 @@ void	eating(t_philo *philo)
 {
 	print_status(philo, EAT);
 	my_usleep(philo->time_to_eat * 1e3);
+	pthread_mutex_lock(&(philo->count_mtx->mtx));
+	philo->eat_count++;
+	pthread_mutex_unlock(&(philo->count_mtx->mtx));
 }
 
 void	sleeping(t_philo *philo)
