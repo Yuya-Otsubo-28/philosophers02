@@ -1,4 +1,4 @@
-#include "../../include/philo.h"
+#include "philo.h"
 
 static void	print_data(t_data *data)
 {

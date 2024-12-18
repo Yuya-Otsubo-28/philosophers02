@@ -6,11 +6,11 @@
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:53:14 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/10/08 17:49:18 by yotsubo          ###   ########.fr       */
+/*   Updated: 2024/12/18 15:10:33 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/philo.h"
+#include "philo.h"
 
 t_bool	is_finish(t_philo *philo)
 {
