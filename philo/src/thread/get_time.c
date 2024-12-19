@@ -23,7 +23,7 @@ long long	get_mtime(void)
 	return (res);
 }
 
-long long get_utime(void)
+long long	get_utime(void)
 {
 	long long	res;
 	t_time		time;
