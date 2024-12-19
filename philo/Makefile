@@ -18,7 +18,10 @@ SRCS		= ./src/cleanup/cleanup_data.c \
 				./src/cleanup/cleanup_mutex.c \
 				./src/cleanup/cleanup_philos.c \
 				./src/cleanup/cleanup_threads.c \
-				./src/error/error.c \
+				./src/error/init_error.c \
+				./src/error/launch_threads_error.c \
+				./src/error/main_error.c \
+				./src/error/mutex_error.c \
 				./src/init/init_data.c \
 				./src/init/init_mutexs.c \
 				./src/init/init_philos.c \
