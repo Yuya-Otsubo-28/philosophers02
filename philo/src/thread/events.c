@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/philo.h"
+#include "philo.h"
 
 void	taking_fork(t_philo *philo, int hand)
 {
@@ -21,29 +21,23 @@ void	taking_fork(t_philo *philo, int hand)
 	print_status(philo, TAKE);
 }
 
-void	died(t_philo *philo, long long now)
-{
-	pthread_mutex_lock(&(philo->msg_mtx->mtx));
-	printf(RED);
-	printf("%lld %zu died\n", now - philo->data->start_time, philo->id);
-	printf(RESET);
-	pthread_mutex_unlock(&(philo->msg_mtx->mtx));
-}
-
 void	eating(t_philo *philo)
 {
 	print_status(philo, EAT);
-	usleep(philo->time_to_eat * 1e3);
+	my_usleep(philo->time_to_eat * 1e3);
+	pthread_mutex_lock(&(philo->count_mtx->mtx));
+	philo->eat_count++;
+	pthread_mutex_unlock(&(philo->count_mtx->mtx));
 }
 
 void	sleeping(t_philo *philo)
 {
 	print_status(philo, SLEEP);
-	usleep(philo->time_to_sleep * 1e3);
+	my_usleep(philo->time_to_sleep * 1e3);
 }
 
 void	thinking(t_philo *philo)
 {
 	print_status(philo, THINK);
-	usleep(100);
+	my_usleep(1e3);
 }

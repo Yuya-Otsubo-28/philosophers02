@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/philo.h"
+#include "philo.h"
 
 static t_bool	update_last_eat(t_philo *philo, long long now)
 {
-	if (now - philo->last_eat > philo->time_to_die)
-		return (FALSE);
+	pthread_mutex_lock(&(philo->count_mtx->mtx));
 	philo->last_eat = now;
+	pthread_mutex_unlock(&(philo->count_mtx->mtx));
 	return (TRUE);
 }
 
@@ -49,14 +49,16 @@ void	print_status(t_philo *philo, int status)
 	char		*message;
 	long long	now;
 
-	now = get_time();
-	if (status == EAT && !update_last_eat(philo, now))
-	{
-		died(philo, now);
-		return ;
-	}
+	now = get_mtime();
+	if (status == EAT)
+		update_last_eat(philo, now);
 	pthread_mutex_lock(&(philo->msg_mtx->mtx));
 	message = make_message(status);
+	if (is_finish(philo))
+	{
+		pthread_mutex_unlock(&(philo->msg_mtx->mtx));
+		return ;
+	}
 	printf("%lld %zu %s\n", now - philo->data->start_time, philo->id, message);
 	printf(RESET);
 	pthread_mutex_unlock(&(philo->msg_mtx->mtx));

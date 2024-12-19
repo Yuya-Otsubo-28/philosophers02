@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   sleep_until_death.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/30 22:34:49 by yotsubo           #+#    #+#             */
-/*   Updated: 2024/09/30 22:34:49 by yotsubo          ###   ########.fr       */
+/*   Created: 2024/10/07 13:48:22 by yotsubo           #+#    #+#             */
+/*   Updated: 2024/10/07 13:48:22 by yotsubo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int argc, char *argv[])
+int	sleep_until_death(t_philo *philo, long long time)
 {
-	t_data	*data;
+	long long	now;
+	long long	death_time;
 
-	data = NULL;
-	if (argc != 5 && argc != 6)
-		return (main_error(data));
-	data = init_data(argc, argv);
-	if (!data)
-		return (main_error(data));
-	launch_threads(data);
-	cleanup_data(data, 0);
-	return (EXIT_SUCCESS);
+	death_time = philo->last_eat + philo->time_to_die;
+	while(1)
+	{
+		now = get_mtime();
+		if (now >= time)
+			break ;
+		if (now >= death_time)
+			return (DEAD);
+		usleep(1);
+	}
+	return (ALIVE);
 }

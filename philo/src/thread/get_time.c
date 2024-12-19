@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/philo.h"
+#include "philo.h"
 
-long long	get_time(void)
+long long	get_mtime(void)
 {
 	long long	res;
 	t_time		time;
@@ -20,5 +20,16 @@ long long	get_time(void)
 	gettimeofday(&time, NULL);
 	res = time.tv_sec * 1e3;
 	res += time.tv_usec / 1e3;
+	return (res);
+}
+
+long long get_utime(void)
+{
+	long long	res;
+	t_time		time;
+
+	gettimeofday(&time, NULL);
+	res = time.tv_sec * 1e6;
+	res += time.tv_usec;
 	return (res);
 }
