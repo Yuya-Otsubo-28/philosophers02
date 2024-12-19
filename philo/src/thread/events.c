@@ -12,6 +12,18 @@
 
 #include "philo.h"
 
+void	died(t_data *data, size_t i, long long now)
+{
+	pthread_mutex_lock(&(data->msg_mtx->mtx));
+	pthread_mutex_lock(&(data->flag_mtx->mtx));
+	printf(RED);
+	printf("%lld %zu died\n", now - data->start_time, i);
+	printf(RESET);
+	data->is_finish = TRUE;
+	pthread_mutex_unlock(&(data->flag_mtx->mtx));
+	pthread_mutex_unlock(&(data->msg_mtx->mtx));
+}
+
 void	taking_fork(t_philo *philo, int hand)
 {
 	if (hand == RIGHT)

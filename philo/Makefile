@@ -26,6 +26,7 @@ SRCS		= ./src/cleanup/cleanup_data.c \
 				./src/thread/get_time.c \
 				./src/thread/launch_threads.c \
 				./src/thread/monitor.c \
+				./src/thread/monitor_utils.c \
 				./src/thread/print_status.c \
 				./src/thread/simulation.c \
 				./src/utils/ft_atoi.c \
