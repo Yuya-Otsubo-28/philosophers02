@@ -13,7 +13,11 @@
 NAME		= philo
 CC			= cc
 CFLAGS		= -Wall -Wextra -Werror -pthread
-SRCS		= ./src/cleanup/cleanup.c \
+SRCS		= ./src/cleanup/cleanup_data.c \
+				./src/cleanup/cleanup_fork.c \
+				./src/cleanup/cleanup_mutex.c \
+				./src/cleanup/cleanup_philos.c \
+				./src/cleanup/cleanup_threads.c \
 				./src/error/error.c \
 				./src/init/init_data.c \
 				./src/init/init_mutexs.c \
