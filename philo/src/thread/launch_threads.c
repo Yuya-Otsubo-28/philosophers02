@@ -61,7 +61,8 @@ t_bool	launch_threads(t_data *data)
 	i = 0;
 	while (i < (size_t)data->num_of_philo)
 	{
-		if (pthread_create(&(data->threads[i]), NULL, simulation_start, data->philos[i]))
+		if (pthread_create(&(data->threads[i]), NULL, \
+			simulation_start, data->philos[i]))
 			return (launch_threads_error(data, i));
 		i++;
 	}

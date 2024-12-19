@@ -38,7 +38,7 @@ static t_philo	*init_philo(t_data *data, size_t i)
 	return (philo);
 }
 
-t_data *init_philos(t_data *data)
+t_data	*init_philos(t_data *data)
 {
 	size_t	i;
 

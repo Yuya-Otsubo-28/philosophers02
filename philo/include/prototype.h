@@ -57,6 +57,9 @@ t_bool		launch_threads(t_data *data);
 
 // monitor.c
 void		*monitor(void *arg);
+void		all_philos_mutex_lock(t_data *data, size_t num);
+void		set_all_philo_dead(t_data *data);
+void		all_philos_mutex_unlock(t_data *data);
 
 // print_status.c
 void		print_status(t_philo *philo, int status);
