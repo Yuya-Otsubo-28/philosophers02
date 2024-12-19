@@ -18,7 +18,7 @@ int	sleep_until_death(t_philo *philo, long long time)
 	long long	death_time;
 
 	death_time = philo->last_eat + philo->time_to_die;
-	while(1)
+	while (1)
 	{
 		now = get_mtime();
 		if (now >= time)
