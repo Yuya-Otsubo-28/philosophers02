@@ -20,7 +20,7 @@ static t_philo	*init_philo(t_data *data, size_t i)
 	if (!philo)
 		return (NULL);
 	memset(philo, 0, sizeof(t_philo));
-	philo->id = i;
+	philo->id = i + 1;
 	philo->right = data->forks[i];
 	if (i == 0)
 		philo->left = data->forks[data->num_of_philo - 1];
