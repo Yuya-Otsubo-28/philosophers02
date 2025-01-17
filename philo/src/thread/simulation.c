@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simulation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yotsubo <y.otsubo.886@ms.saitama-u.ac.j    +#+  +:+       +#+        */
+/*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:53:14 by yuotsubo          #+#    #+#             */
-/*   Updated: 2024/12/20 00:37:34 by yotsubo          ###   ########.fr       */
+/*   Updated: 2025/01/17 16:18:26 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ t_bool	is_finish(t_philo *philo)
 
 static void	even_simulation(t_philo *philo)
 {
+	thinking(philo);
+	if (philo->data->num_of_philo % 2)
+		my_usleep((philo->data->time_to_eat + philo->data->time_to_eat / (philo->data->num_of_philo / 2) \
+			* (philo->id / 2)) * 1e3 + 10);
 	while (1)
 	{
 		taking_fork(philo, RIGHT);
@@ -60,9 +64,12 @@ static void	even_simulation(t_philo *philo)
 
 static void	odd_simulation(t_philo *philo)
 {
+	thinking(philo);
+	if (philo->data->num_of_philo % 2)
+		my_usleep((philo->data->time_to_eat * 1e3 / (philo->data->num_of_philo / 2)) \
+			* (philo->id / 2));
 	while (1)
 	{
-		thinking(philo);
 		if (is_finish(philo))
 			break ;
 		taking_fork(philo, LEFT);
@@ -80,6 +87,7 @@ static void	odd_simulation(t_philo *philo)
 		sleeping(philo);
 		if (is_finish(philo))
 			break ;
+		thinking(philo);
 	}
 }
 
@@ -100,8 +108,8 @@ void	*simulation_start(void *arg)
 		pthread_mutex_unlock(&(philo->flag_mtx->mtx));
 	}
 	if (philo->id % 2)
-		even_simulation(philo);
-	else
 		odd_simulation(philo);
+	else
+		even_simulation(philo);
 	return (NULL);
 }

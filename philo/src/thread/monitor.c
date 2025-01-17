@@ -40,7 +40,7 @@ static t_bool	is_philo_dead(t_data *data, size_t i)
 		set_all_philo_dead(data);
 		pthread_mutex_lock(&(data->msg_mtx->mtx));
 		pthread_mutex_unlock(&(data->msg_mtx->mtx));
-		died(data, i, now);
+		died(data, i + 1, now);
 		all_philos_mutex_unlock(data);
 		return (TRUE);
 	}
