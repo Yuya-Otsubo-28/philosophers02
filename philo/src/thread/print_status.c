@@ -41,6 +41,8 @@ static char	*make_message(int status)
 		printf(GREEN);
 		message = "is thinking";
 	}
+	else
+		message = "nop";
 	return (message);
 }
 
