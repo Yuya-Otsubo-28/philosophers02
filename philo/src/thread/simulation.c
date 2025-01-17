@@ -6,7 +6,7 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:53:14 by yuotsubo          #+#    #+#             */
-/*   Updated: 2025/01/17 16:18:26 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2025/01/17 18:23:34 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ static void	even_simulation(t_philo *philo)
 {
 	thinking(philo);
 	if (philo->data->num_of_philo % 2)
-		my_usleep((philo->data->time_to_eat + philo->data->time_to_eat / (philo->data->num_of_philo / 2) \
-			* (philo->id / 2)) * 1e3 + 10);
+		my_usleep((philo->data->time_to_eat + philo->data->time_to_eat / \
+		(philo->data->num_of_philo / 2) * (philo->id / 2)) * 1e3 + 10);
 	while (1)
 	{
 		taking_fork(philo, RIGHT);
@@ -66,8 +66,8 @@ static void	odd_simulation(t_philo *philo)
 {
 	thinking(philo);
 	if (philo->data->num_of_philo % 2)
-		my_usleep((philo->data->time_to_eat * 1e3 / (philo->data->num_of_philo / 2)) \
-			* (philo->id / 2));
+		my_usleep((philo->data->time_to_eat * 1e3 / \
+		(philo->data->num_of_philo / 2)) * (philo->id / 2));
 	while (1)
 	{
 		if (is_finish(philo))
