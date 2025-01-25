@@ -6,13 +6,13 @@
 /*   By: yuotsubo <yuotsubo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 13:53:14 by yuotsubo          #+#    #+#             */
-/*   Updated: 2025/01/19 14:36:34 by yuotsubo         ###   ########.fr       */
+/*   Updated: 2025/01/19 15:57:20 by yuotsubo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static t_bool	drop_forks(t_fork *first, t_fork *second)
+t_bool	drop_forks(t_fork *first, t_fork *second)
 {
 	if (first)
 		pthread_mutex_unlock(&(first->my_mtx->mtx));

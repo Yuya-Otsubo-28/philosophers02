@@ -32,7 +32,10 @@ static void	*one_philo(void *arg)
 	while (1)
 	{
 		if (is_finish(philo))
+		{
+			drop_forks(philo->left, NULL);
 			break ;
+		}
 	}
 	return (NULL);
 }
