@@ -33,15 +33,18 @@ static t_bool	is_philo_dead(t_data *data, size_t i)
 	long long	now;
 
 	now = get_mtime();
+	pthread_mutex_lock(&(data->philos[i]->flag_mtx->mtx));
 	if (data->philos[i]->last_eat && \
 		now - data->philos[i]->last_eat >= data->philos[i]->time_to_die)
 	{
+		pthread_mutex_unlock(&(data->philos[i]->flag_mtx->mtx));
 		all_philos_mutex_lock(data, i);
 		set_all_philo_dead(data);
 		died(data, i + 1, now);
 		all_philos_mutex_unlock(data);
 		return (TRUE);
 	}
+	pthread_mutex_unlock(&(data->philos[i]->flag_mtx->mtx));
 	return (FALSE);
 }
 
