@@ -2,3 +2,7 @@
 *.o
 philo/philo
 *a.out
+*.sh
+*.txt
+*.py
+*.log
