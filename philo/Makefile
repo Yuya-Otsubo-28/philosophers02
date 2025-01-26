@@ -12,7 +12,7 @@
 
 NAME		= philo
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -pthread -g -O3
+CFLAGS		= -Wall -Wextra -Werror -pthread #-g -fsanitize=memory
 SRCS		= ./src/cleanup/cleanup_data.c \
 				./src/cleanup/cleanup_fork.c \
 				./src/cleanup/cleanup_mutex.c \
@@ -39,6 +39,7 @@ SRCS		= ./src/cleanup/cleanup_data.c \
 				./src/utils/my_mutex.c \
 				./src/utils/sleep_until_death.c \
 				./src/utils/my_usleep.c \
+				./src/utils/first_sleep.c \
 				./src/main.c
 OBJS		= $(SRCS:.c=.o)
 INCLUDES	= -I./include

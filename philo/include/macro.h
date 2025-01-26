@@ -29,6 +29,9 @@
 # define ALIVE 1
 # define DEAD 0
 
+# define EVEN 0
+# define ODD 1
+
 # define RESET "\x1b[0m"
 # define RED "\x1b[31m"
 # define YELLOW "\x1b[33m"

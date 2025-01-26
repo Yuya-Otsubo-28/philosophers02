@@ -70,6 +70,7 @@ t_bool		is_finish(t_philo *philo);
 void		*simulation_start(void *arg);
 
 // utils
+void		first_sleep(t_philo *philo, int	type);
 int			ft_atoi(const char *nptr);
 int			ft_isdigit(int c);
 int			ft_isspace(char c);
