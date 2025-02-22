@@ -20,6 +20,7 @@ void	cleanup_data(t_data *data, size_t i)
 	cleanup_forks(data->forks, data->num_of_philo);
 	cleanup_threads(data->threads, i);
 	cleanup_mutex(data->msg_mtx);
+	cleanup_mutex(data->flag_mtx);
 	cleanup_mutexs(data->count_mtxs, data->num_of_philo);
 	free(data);
 }
